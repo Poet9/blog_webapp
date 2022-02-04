@@ -1,0 +1,30 @@
+.exploreBg {
+    background-image: url('../img/blog_design_main2.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+.presentationH1{
+    padding: 10% 0 0 10%;
+    height: fit-content;
+    width: 550px;
+    margin-top: 120px;
+    text-align: left;
+}
+@media screen and (max-width: 1150px){
+ .presentationH1{
+     display: none
+ }
+}
+
+.risingStarsH5{
+    cursor: pointer;
+    padding: 1rem 0.5rem;
+}
+.risingStarsH5:hover{
+    background-color: #3339;
+  }
+  
+  

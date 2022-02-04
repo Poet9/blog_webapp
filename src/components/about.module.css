@@ -1,0 +1,15 @@
+.aboutPresentation {
+    background-image: url('../img/blog-design-about.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+
+.aboutPresentation h1 {
+    padding: 3% 23% 0 3%;
+}
+.quoteIcon {
+    transform:rotate(180deg);
+}

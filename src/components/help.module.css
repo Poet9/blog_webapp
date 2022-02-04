@@ -1,0 +1,11 @@
+.helpPresentation {
+    background-image: url('../img/Blog_design_help.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+.helpPresentation h1 {
+    padding: 3% 20% 0 3%;
+}
