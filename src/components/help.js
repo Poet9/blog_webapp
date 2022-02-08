@@ -3,10 +3,11 @@ import { Col, Row, Nav } from 'react-bootstrap';
 import styles from './help.module.css';
 /***** icons ******/
 
-export default function Help() {
-  return <div>
+export default function Help(props) {
+  props.searchDisplay(false); // hiding search bar
+  return <div className='text-light'>
     <div className={styles.helpPresentation}>
-      <h1 className='display-2'>Need help getting started?</h1>
+      <h1 className='display-2 text-light'>Need help getting started?</h1>
     </div>
     <Row className='my-5 mx-1'>
       <Col xl={3} >

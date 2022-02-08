@@ -1,6 +1,9 @@
 .blogCardBody{
+    height: 100%;
+}
+.blogCardBodyDiv{
     display: flex;
     justify-content: space-between;
-    height: 100%;
     flex-direction: column;
+    height: 100%;
 }

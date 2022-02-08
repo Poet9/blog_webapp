@@ -1,5 +1,8 @@
 import React from 'react';
 
-export default function Blogpost() {
-  return <div></div>;
+export default function Blogpost(props) {
+  props.searchDisplay(false);
+  return <div>
+
+  </div>;
 }
