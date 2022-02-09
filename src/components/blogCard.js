@@ -5,17 +5,11 @@ import userIcon from '../img/avatardefault.png';
 import { useNavigate } from 'react-router-dom';
 export default function BlogCard(props) {
     const navigate = useNavigate();
-  const blogData = {
-      id: 1243,
-      img : "https://picsum.photos/200",
-      title: "blog title",
-      description: "Reprehenderit laborum anim cillum non. Ea in occaecat nostrud ea in tempor. In pariatur quis consectetur ad minim Lorem laboris aute.",
-      date: "02-02-2022"
-  }
-  const redirectToBlogPost = ()=>{
-    navigate(`/blog/${blogData.id}`);
-  }
-  return <div onClick={redirectToBlogPost}>
+    const blogData = { ...props.blogData , img: 'https://picsum.photos/300'}
+    const redirectToBlogPost = ()=>{
+        navigate(`/blog/${blogData.id}`);
+    }
+  return <div onClick={redirectToBlogPost} className='cursor-pointer'>
       <Card className="bg-light my-4"  >
         <Row>
             <Col lg={4}>
@@ -25,7 +19,7 @@ export default function BlogCard(props) {
                     <Card.Body className={styles.blogCardBody}>
                     <div className={styles.blogCardBodyDiv}>
                         <Card.Title className='pt-2'>{blogData.title}</Card.Title>
-                        <Card.Text>{blogData.description}</Card.Text>
+                        <Card.Text>{blogData.body}</Card.Text>
                         <Row className="d-flex justify-content-center">
                             <Col md={8} className="d-flex text-dark">
                                 <img src={userIcon} alt="img" width="60px" height="60px" />

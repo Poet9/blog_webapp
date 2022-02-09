@@ -27,3 +27,16 @@
   border: 1px solid white;
   border-radius: 50%;
 }
+.userOptionsStyle{
+  align-content: right;
+  right: 0;
+}
+.userOptionNav{
+  padding: 10px;
+  margin: 2px;
+  cursor: pointer;
+}
+.userOptionNav:hover{
+  background-color: #555;
+  
+}

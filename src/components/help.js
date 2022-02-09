@@ -4,7 +4,6 @@ import styles from './help.module.css';
 /***** icons ******/
 
 export default function Help(props) {
-  props.searchDisplay(false); // hiding search bar
   return <div className='text-light'>
     <div className={styles.helpPresentation}>
       <h1 className='display-2 text-light'>Need help getting started?</h1>

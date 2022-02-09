@@ -6,7 +6,6 @@ import quoteIcon from '../icons/quote.svg';
 import userIcon from '../img/avatardefault.png';
 
 export default function About(props) {
-  props.searchDisplay(false); // hiding search bar
   /******* contributors ******/
   const contributors = [
     {img: userIcon, username: "johndoe", role: "whatever"},

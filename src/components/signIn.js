@@ -5,7 +5,6 @@ import styles from './signIn.module.css';
 import loadingIcon from "../icons/loader.svg";
 
 export default function SignIn(props) {
-    props.searchDisplay(false); // hiding search bar
     const user = useSelector(state => state.user.value);
     const navigate = useNavigate();
     useEffect(()=>{

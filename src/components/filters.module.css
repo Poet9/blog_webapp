@@ -1,0 +1,17 @@
+.risingStarsH5{
+    cursor: pointer;
+    padding: 1rem 0.5rem;
+}
+.risingStarsH5:hover{
+    background-color: #3339;
+}
+
+.navLinkFavUsrClassActive{
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #555;
+}
+.navLinkFavUsrClass:hover{
+    background-color: #555;
+}
