@@ -40,3 +40,44 @@
   background-color: #555;
   
 }
+.blogCommentContainer{
+  border: 2px solid #fff;
+  border-radius: 5px;
+  background-color: #ddd;
+  padding: 1rem;
+}
+
+
+/****** blogPost Style *****/
+.blogPostMain {
+  align-content: center;
+}
+.blogPostContainer {
+  width: 60%;
+  display: inline-flex;
+  flex-direction: column;
+  text-align: left;
+}
+/*********** comment style ******/ 
+.commentComponent {
+  width: 90%;
+  background-color: white;
+  border-radius: 4px;
+  margin: 2px 0;
+  box-shadow: 10px 10px 5px #aaaaaa;
+  font-weight: 500;
+}
+
+.commentComponent .commentText {
+  font-size: 15px;
+  color: #56575b;
+}
+
+.commentComponent img{
+  cursor: pointer;
+}
+.commentComponent .upVoteText {
+  font-size: 13px;
+  margin: 0 4px;
+  color: #828386;
+}

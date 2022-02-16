@@ -33,14 +33,14 @@ const fetchUserFunc = async (dispatchUser, setActiveUser) =>{
   })
   .catch(e => console.log("error fetching blogs: ", e.message));
 }
-
+//main component
 function App() {
     // user fetching  
     const [activeUser, setActiveUser] = useState({});
     const dispatch = useDispatch();
     useEffect(() => {
       fetchUserFunc(dispatch, setActiveUser)
-    }, [])
+    }, [dispatch])
   
     //Control apearance/disapearance of the search bar
     const [searchDisplay, setSearchDisplay] = useState(false); 
@@ -125,8 +125,8 @@ function App() {
           <Route path='/about' element={<About />}/>
           <Route path='/help' element={<Help />}/>
           <Route path='/signin' element={<SignIn />} />
-          <Route path='/*' element={<PageNoteFound />} />
           <Route path='/blog/:id' element={<Blogpost  blogId={''}/>} />
+          <Route path='/*' element={<PageNoteFound />} />
         </Routes>
         <footer className="mainFooter text-light">
           <div className='d-flex px-5'>
