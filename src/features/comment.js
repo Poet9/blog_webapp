@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialStateValue = [{id: 0, email: "", body: "", 
-    upVote: 0, postId: 0 }];
+    upVote: 0, postId: 0, upVotedUsers:[""] }];
 
 const commentsSlice = createSlice({
     name: "comments",

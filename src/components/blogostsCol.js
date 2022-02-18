@@ -47,7 +47,7 @@ export default function BlogostsCol(props) {
             </>
     }
     return <React.Suspense fallback={<div>Loading...</div>}>
-         <Col xl={9} >
+         <Col xl={9}>
             {DisplayBlogsFunc()}
             { appliedFilter.blogTitle=== "" &&
             <div className='text-center my-2'>

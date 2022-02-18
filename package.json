@@ -1,6 +1,7 @@
 {
   "name": "blog",
   "version": "0.1.0",
+  "author": "Amine Bouhamri",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",

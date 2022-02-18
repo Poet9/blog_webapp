@@ -11,6 +11,8 @@ import Help from './components/help';
 import PageNoteFound from './components/pageNoteFound';
 import SignIn from './components/signIn';
 import requestTemplate from './utilities/requestTemplate';
+import UserAcc from "./components/user";
+import MyAcc from "./components/me";
 /*********** STORE  *******/
 import { useDispatch, useSelector } from 'react-redux';
 import {setBlogTitle} from "./features/filter";
@@ -29,7 +31,7 @@ const fetchUserFunc = async (dispatchUser, setActiveUser) =>{
   .then((res) => res.json())
   .then((data)=> {
     dispatchUser(setUser(data));
-    setActiveUser(data)
+    setActiveUser(data);
   })
   .catch(e => console.log("error fetching blogs: ", e.message));
 }
@@ -39,7 +41,7 @@ function App() {
     const [activeUser, setActiveUser] = useState({});
     const dispatch = useDispatch();
     useEffect(() => {
-      fetchUserFunc(dispatch, setActiveUser)
+      fetchUserFunc(dispatch, setActiveUser);
     }, [dispatch])
   
     //Control apearance/disapearance of the search bar
@@ -75,7 +77,11 @@ function App() {
             className=' me-2'>Sign in</Button>
       </div>
     }
-  
+    const logoutFunc = ()=>{ //handling logging out 
+      dispatch(clearUser({id: activeUser.id}));
+      setUserOptionsDisplay(false);
+      setActiveUser({});
+    }
   return (
     <UserContext.Provider value={activeUser}>
     <BrowserRouter>
@@ -111,11 +117,11 @@ function App() {
         </Navbar>
         <Collapse className='bg-dark position-fixed' in={userOptionsDisplay}>
           <div className='userOptionsStyle'>
-            <Nav className='flex-column'>
-              <Nav.Link className='userOptionNav text-light'>View account</Nav.Link>
-              <Nav.Link className='userOptionNav text-light'>Account setting</Nav.Link>
+            <Nav className='flex-column' onClick={()=>setUserOptionsDisplay(false)}>
+              <Nav.Link as={Link} to='/users/:username' className='userOptionNav text-light'>View account</Nav.Link>
+              <Nav.Link as={Link} to='/users/me' className='userOptionNav text-light'>Account setting</Nav.Link>
               <Nav.Link className='text-light'> 
-                <Button variant="primary" className='w-100'>Logout</Button>
+                <Button variant="primary" onClick={logoutFunc} className='w-100'>Logout</Button>
               </Nav.Link>
             </Nav>
           </div>
@@ -126,6 +132,8 @@ function App() {
           <Route path='/help' element={<Help />}/>
           <Route path='/signin' element={<SignIn />} />
           <Route path='/blog/:id' element={<Blogpost  blogId={''}/>} />
+          <Route path='/users/me' element={<MyAcc />} />
+          <Route path='/users/:username' element={<UserAcc />} />
           <Route path='/*' element={<PageNoteFound />} />
         </Routes>
         <footer className="mainFooter text-light">

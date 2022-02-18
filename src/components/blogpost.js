@@ -35,10 +35,13 @@ export default function Blogpost() {
       fetchBlogFunc(Number(blog.id), setBlogData);
       fetchCommentsFunc(Number(blog.id), setBlogComments);
     }, [blog.id]);
-
     const writeCommentFunc = (e)=>{ /// handling writing comments 
       e.preventDefault();
-      console.log("the comment: ", e.target.firstChild.value, currentUser);
+      if(currentUser.email.length < 1){
+        e.target.firstChild.value = "";
+        alert("you are not logged in");
+        return;
+      }
       dispatch(setComment({
         userId: currentUser.id,
         id: Math.floor(Math.random()*150),
@@ -49,6 +52,10 @@ export default function Blogpost() {
       setBlogComments([...blogComments, {userId: currentUser.id, id: Math.floor(Math.random()*150),
         body: e.target.firstChild.value, email: currentUser.email, blogId: blogData.id, upVote: 0}])
       e.target.firstChild.value = "";
+    }
+    const deleteCommentFunc = (commentId)=>{// handle deleting comments
+      dispatch(deleteComment({id: commentId}));
+      setBlogComments(blogComments.filter(comment => comment.id !== commentId));
     }
   return <div className='blogPostMain text-light pb-5 text-center' id={blogData.id}>
       <div className='blogPostContainer'>
@@ -63,7 +70,7 @@ export default function Blogpost() {
         </article>
         <div className='blogCommentContainer text-dark d-inline-block'>
           {!blogComments?<div className='p-5 bg-light m-2'>NO COMMENTS YET</div> 
-            : blogComments.map((comment, index)=><Comment key={index} comment={comment}/>)
+            : blogComments.map((comment, index)=><Comment key={index} deleteComment={deleteCommentFunc} comment={comment}/>)
           }
           <form className='d-flex p-1 ' onSubmit={writeCommentFunc}>
             <input className='form-control px-5 py-2' type='text' placeholder='comment' required/>

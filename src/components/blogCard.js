@@ -12,10 +12,10 @@ export default function BlogCard(props) {
   return <div onClick={redirectToBlogPost} className='cursor-pointer'>
       <Card className="bg-light my-4"  >
         <Row>
-            <Col lg={4}>
+            <Col lg={4} md={5}>
                 <Card.Img variant="top" src={blogData.img}/>
             </Col>
-            <Col lg={7} className="align-items-end">
+            <Col lg={7} md={6} className="align-items-end">
                     <Card.Body className={styles.blogCardBody}>
                     <div className={styles.blogCardBodyDiv}>
                         <Card.Title className='pt-2'>{blogData.title}</Card.Title>
