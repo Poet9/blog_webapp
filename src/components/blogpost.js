@@ -4,8 +4,10 @@ import requestTemplate from '../utilities/requestTemplate';
 import { setComment, deleteComment } from '../features/comment';
 import { useDispatch, useSelector } from 'react-redux';
 import Comment from './Comment';
+import RatingComponent from "./rating";
 /***** icons *******/
 import sendIcon from "../icons/send.svg";
+import dummyAvatar from "../img/blog_logo.png";
 
 // fetch data 
 const fetchBlogFunc = async (blogId, setBlogData) =>{
@@ -57,17 +59,23 @@ export default function Blogpost() {
       dispatch(deleteComment({id: commentId}));
       setBlogComments(blogComments.filter(comment => comment.id !== commentId));
     }
-  return <div className='blogPostMain text-light pb-5 text-center' id={blogData.id}>
+  return <div className='pb-5 text-center' id={blogData.id}>
       <div className='blogPostContainer'>
         <div 
-          style={{background: `url(${blogData.img}) no-repeat bottom`,
-            backgroundSize: 'cover', 
-            height: '250px'}}>
+          style={{background: `url(${blogData.img}) no-repeat center`, height: '250px'}}>
         </div>
-        <article>
+        <article className='text-light'>
           <h2 className='my-2 display-3'>{blogData.title}</h2>
           <p className='d-block text-left'>{blogData.body}</p>
         </article>
+        <div className='d-flex text-light'>
+            <img src={dummyAvatar} alt="BT" style={{borderRadius: "50%"}} width="50px" height="50px"/>
+            <div className='px-3'>
+              <h6>Username</h6>
+              <p>role</p>
+            </div>
+            <RatingComponent totalRaters={15982} ratingValue={3.5}/>
+        </div>
         <div className='blogCommentContainer text-dark d-inline-block'>
           {!blogComments?<div className='p-5 bg-light m-2'>NO COMMENTS YET</div> 
             : blogComments.map((comment, index)=><Comment key={index} deleteComment={deleteCommentFunc} comment={comment}/>)

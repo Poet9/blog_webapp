@@ -3,7 +3,10 @@ import { Container, Row } from 'react-bootstrap';
 import styles from './explore.module.css';
 import Filters from './filters';
 const BlogostsColPromise = import('./blogostsCol');
+
 const BlogostsCol = React.lazy(()=>BlogostsColPromise);
+
+// explore component
 export default function Explore(props) {
   useEffect(() => {  // showing search bar
     props.searchDisplay(true);
@@ -20,7 +23,7 @@ export default function Explore(props) {
         <div className='col-lg d-flex flex-row-reverse'>
         <img 
           className='float-left'
-          src="https://media4.giphy.com/media/oNPfdkokpn5uDk3t8N/giphy.gif?cid=790b761109342d23cd3c1ac4284ade16b7e3bc2629b2eabd&rid=giphy.gif&ct=g" 
+          src="https://media3.giphy.com/media/3K1agabRsMA6GVKOZY/giphy.gif?cid=790b7611f9d6c553091490aa3d6d4638ce8718499ca66e2c&rid=giphy.gif&ct=g" 
           alt=""  width="350px" height="250px" />
         </div>
       </div>

@@ -1,6 +1,6 @@
 
 .bg-myRed{
-  background-color: #a40000;
+  background-color: #af0000;
 }
 .mainFooter {
   background-color: #111; 
@@ -49,9 +49,7 @@
 
 
 /****** blogPost Style *****/
-.blogPostMain {
-  align-content: center;
-}
+
 .blogPostContainer {
   width: 60%;
   display: inline-flex;

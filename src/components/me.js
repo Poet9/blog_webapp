@@ -5,6 +5,7 @@ import { Spinner } from 'react-bootstrap';
 import { setUser, clearUser } from '../features/user';
 import requestTemplate from '../utilities/requestTemplate';
 import defaultUserImg from '../img/avatardefault.png';
+import backIcon from '../icons/arrow-left.svg'
 const fetchUserData = async (navigate, setUserData, dispatch) =>{
     requestTemplate(`users/1`)
     .then((res) => {
@@ -49,6 +50,10 @@ export default function ActiveUser() {
         </>
       }
       return <form onSubmit={submitEditingFunc}>
+          <img src={backIcon} alt="" width="30px" 
+            style={{float: "left", marginBottom: "5px", cursor: "pointer"}} 
+            onClick={()=> !submitEditing &&setUserEditing(false)}
+          />
           <input type="email" id='userEmailInput' className="form-control my-2" placeholder='Enter Email' />
           <input type="text" id='userUsernameInput' className="form-control my-2" placeholder='Enter username' />
           <div className='d-flex flex-wrap my-3 ' style={{height: "50px"}}>

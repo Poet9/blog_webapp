@@ -13,6 +13,7 @@ import SignIn from './components/signIn';
 import requestTemplate from './utilities/requestTemplate';
 import UserAcc from "./components/user";
 import MyAcc from "./components/me";
+import Blogpost from './components/blogpost';
 /*********** STORE  *******/
 import { useDispatch, useSelector } from 'react-redux';
 import {setBlogTitle} from "./features/filter";
@@ -22,7 +23,7 @@ import searchIcon from './icons/search.svg';
 import githubIcon from './icons/github.svg';
 import linkedinIcon from './icons/linkedin.svg';
 import defautAvatar from './img/avatardefault.png';
-import Blogpost from './components/blogpost';
+import logoIcon from './img/blog_logo.png';
 
 export const UserContext = React.createContext({});
 
@@ -89,7 +90,9 @@ function App() {
         <Navbar bg="myRed"
           expand="lg" variant='dark' sticky='top' >
           <Container >
-            <Navbar.Brand href="#home">Blog</Navbar.Brand>
+            <Navbar.Brand href="/">
+              <img src={logoIcon} alt="" width="30" height="30" className="d-inline-block align-top"/>
+              </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav" >
               <Nav className="me-auto">
@@ -142,7 +145,7 @@ function App() {
             <a href="https://github.com/poet9" rel="noreferrer" target="_blank">
               <img className='rounded-circle bg-secondary p-1' src={githubIcon} alt='' width='30px' />
             </a>
-            <a className='mx-2 ' href="https://www.linkedin.com/" rel="noreferrer" target="_blank">
+            <a className='mx-2 ' href="https://www.linkedin.com/in/amine-bouhamri-9b0b9b1b2" rel="noreferrer" target="_blank">
               <img className='rounded-circle bg-secondary p-1' src={linkedinIcon} alt='' width='30px'/>
             </a>
           </div>
