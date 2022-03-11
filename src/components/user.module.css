@@ -1,0 +1,40 @@
+.userAccountOptions{
+    background-color: #111;
+    height: 100vh;
+}
+.UseroptionNavLinks{
+    color: white;
+    padding:12px 16px;
+    width:auto;
+    border:none;
+    outline:0;
+}
+.UseroptionNavLinks:hover{
+    background-color: #000;
+    color: white;
+}
+.UseroptionNavLinks:focus{
+    color: white;
+}
+.UseroptionNavLinksActive{
+    border-radius: 15px;
+    border: 3px solid #eee;
+    background-color: #000;
+}
+
+.offCanvasButton{
+    text-align: left;
+    color: inherit;
+}
+.createArticleForm{
+    height: 97vh;
+    overflow-y: scroll;
+}
+.createArticlePreview{
+    height: 90vh;
+    overflow-y: scroll;
+    color: #fff;
+    padding: 10px;
+    border: 2px solid #555;
+    border-left: 2px solid #000;
+}

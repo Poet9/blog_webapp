@@ -7,6 +7,7 @@ const requestTemplate = async (url = '', type= 'GET', credentials, headers= {"co
             mode: "cors",
             cache: "default",
             credentials,
+            redirect: 'manual'
         });
     return await fetch(`https://jsonplaceholder.typicode.com/${url}`,{
         method: type,
@@ -15,6 +16,7 @@ const requestTemplate = async (url = '', type= 'GET', credentials, headers= {"co
         cache: "default",
         body,
         credentials,
+        redirect: 'manual'
     });
 }
 export default requestTemplate;

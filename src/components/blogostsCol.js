@@ -1,6 +1,7 @@
-import React , { useState } from 'react';
+import React , { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Col } from 'react-bootstrap';
+import emptyIcon from '../img/No_posts_yet.png';
 /// fetching blogs cases
 import requestTemplate from '../utilities/requestTemplate';
 import { useDispatch } from 'react-redux';
@@ -21,6 +22,10 @@ export default function BlogostsCol(props) {
     const dispatchBlogs = useDispatch();
     const [postsNumber, setpostsNumber] = useState(4);
     const blogs = useSelector(state => state.blogs.value); // get blogs
+    useEffect(() => {
+        getMoreBlogsFunc(dispatchBlogs, postsNumber, setpostsNumber);
+    }, [dispatchBlogs, ])
+    
     const appliedFilter = useSelector(state => state.filter.value); // get applied filter
     const DisplayBlogsFunc =()=>{
         if(appliedFilter.blogTitle){
@@ -33,7 +38,7 @@ export default function BlogostsCol(props) {
         }
         return <>
                 <h1 className='my-5 text-light'>TRENDING BLOGS</h1>
-                {blogs.map((blog, index)=>{
+                {blogs.length >1?blogs.map((blog, index)=>{
                     if(blog.title?.length >1){
                         if(appliedFilter.filter.length > 1){
                         if(blog.hashtags && blog.hashtags[0] === appliedFilter) 
@@ -43,7 +48,7 @@ export default function BlogostsCol(props) {
                         return <BlogCard key={index} id={blog.id} blogData={blog} />
                     }
                     return "";
-                })}
+                }): <img src={emptyIcon} alt="" width="100%"/>}
             </>
     }
     return <React.Suspense fallback={<div>Loading...</div>}>
@@ -51,10 +56,10 @@ export default function BlogostsCol(props) {
             {DisplayBlogsFunc()}
             { appliedFilter.blogTitle=== "" &&
             <div className='text-center my-2'>
-                <button 
+                {blogs.length >1 &&<button 
                     onClick={()=>getMoreBlogsFunc(dispatchBlogs, postsNumber, setpostsNumber)} 
                     className='btn btn-primary '>Show more
-                </button>
+                </button>}
             </div>}
         </Col>
         </React.Suspense>;

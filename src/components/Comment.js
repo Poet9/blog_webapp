@@ -44,7 +44,7 @@ export default function Comment(props) {
         <span className="commentText">{comment.body}</span>
         <div className="d-flex justify-content-between py-1 pt-2">
             <div>
-                <img src="https://i.imgur.com/AgAC1Is.jpg" alt="" width="18" />
+                <img src={"https://i.imgur.com/AgAC1Is.jpg"} alt="" width="18" />
                 <span className="commentText mx-2">{comment.email}</span>
             </div>
             <div>

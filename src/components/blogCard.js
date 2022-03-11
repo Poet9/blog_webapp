@@ -5,12 +5,12 @@ import userIcon from '../img/avatardefault.png';
 import { useNavigate } from 'react-router-dom';
 export default function BlogCard(props) {
     const navigate = useNavigate();
-    const blogData = { ...props.blogData , img: 'https://picsum.photos/300'}
+    const blogData = { ...props.blogData , img: 'https://picsum.photos/300', createdAt: "22-02-16"}
     const redirectToBlogPost = ()=>{
         navigate(`/blog/${blogData.id}`);
     }
   return <div onClick={redirectToBlogPost} className='cursor-pointer'>
-      <Card className="bg-light my-4"  >
+      <Card className="bg-light my-4 mx-auto text-dark" style={{maxWidth: "900px"}} >
         <Row>
             <Col lg={4} md={5}>
                 <Card.Img variant="top" src={blogData.img}/>
@@ -28,7 +28,7 @@ export default function BlogCard(props) {
                                     <p>role</p>
                                 </div>
                             </Col>
-                            <Col md={4}  className="text-primary">{blogData.date}</Col>
+                            <Col md={4}  className="text-primary">{blogData.createdAt}</Col>
                         </Row>
                     </div >
                 </Card.Body>
