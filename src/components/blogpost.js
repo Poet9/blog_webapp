@@ -8,6 +8,11 @@ import RatingComponent from "./rating";
 /***** icons *******/
 import sendIcon from "../icons/send.svg";
 import dummyAvatar from "../img/blog_logo.png";
+// markdown source
+import ReactMarkdown from 'react-markdown';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import remarkGfm from 'remark-gfm';
 
 // fetch data 
 const fetchBlogFunc = async (blogId, setBlogData) =>{
@@ -26,67 +31,135 @@ const fetchCommentsFunc = async (blogId, setBlogComments) =>{
 }
 // component function 
 export default function Blogpost() {
-    const dispatch = useDispatch();
-    const blog = useParams();
-    //getting state
-    const currentUser = useSelector(state => state.user?.value);
-    const [blogData, setBlogData] = useState({});
-    // getting comments this will be replaced by an actual fetch 
-    const [blogComments, setBlogComments] = useState([]);
-    useEffect(() => {
-      fetchBlogFunc(Number(blog.id), setBlogData);
-      fetchCommentsFunc(Number(blog.id), setBlogComments);
-    }, [blog.id]);
-    const writeCommentFunc = (e)=>{ /// handling writing comments 
-      e.preventDefault();
-      if(currentUser.email.length < 1){
-        e.target.firstChild.value = "";
-        alert("you are not logged in");
-        return;
-      }
-      dispatch(setComment({
+  const dispatch = useDispatch();
+  const blog = useParams();
+  //getting state
+  const currentUser = useSelector((state) => state.user?.value);
+  const [blogData, setBlogData] = useState({});
+  // getting comments this will be replaced by an actual fetch
+  const [blogComments, setBlogComments] = useState([]);
+  useEffect(() => {
+    fetchBlogFunc(Number(blog.id), setBlogData);
+    fetchCommentsFunc(Number(blog.id), setBlogComments);
+  }, [blog.id]);
+  const writeCommentFunc = (e) => {
+    /// handling writing comments
+    e.preventDefault();
+    if (currentUser.email.length < 1) {
+      e.target.firstChild.value = "";
+      alert("you are not logged in");
+      return;
+    }
+    dispatch(
+      setComment({
         userId: currentUser.id,
-        id: Math.floor(Math.random()*150),
+        id: Math.floor(Math.random() * 150),
         comment: e.target.firstChild.value,
         blogId: blogData.id,
-        upVote: 0
-      }));
-      setBlogComments([...blogComments, {userId: currentUser.id, id: Math.floor(Math.random()*150),
-        body: e.target.firstChild.value, email: currentUser.email, blogId: blogData.id, upVote: 0}])
-      e.target.firstChild.value = "";
-    }
-    const deleteCommentFunc = (commentId)=>{// handle deleting comments
-      dispatch(deleteComment({id: commentId}));
-      setBlogComments(blogComments.filter(comment => comment.id !== commentId));
-    }
-  return <div className='pb-5 text-center' id={blogData.id}>
-      <div className='blogPostContainer'>
-        <div 
-          style={{background: `url(${blogData.img}) no-repeat center`, height: '250px'}}>
-        </div>
-        <article className='text-light'>
-          <h2 className='my-2 display-3'>{blogData.title}</h2>
-          <p className='d-block text-left'>{blogData.body}</p>
+        upVote: 0,
+      })
+    );
+    setBlogComments([
+      ...blogComments,
+      {
+        userId: currentUser.id,
+        id: Math.floor(Math.random() * 150),
+        body: e.target.firstChild.value,
+        email: currentUser.email,
+        blogId: blogData.id,
+        upVote: 0,
+      },
+    ]);
+    e.target.firstChild.value = "";
+  };
+  const deleteCommentFunc = (commentId) => {
+    // handle deleting comments
+    dispatch(deleteComment({ id: commentId }));
+    setBlogComments(blogComments.filter((comment) => comment.id !== commentId));
+  };
+  return (
+    <div className="pb-5 text-center" id={blogData.id}>
+      <div className="blogPostContainer">
+        <div
+          style={{
+            background: `url(${blogData.img}) no-repeat center`,
+            height: "250px",
+          }}
+        ></div>
+        <article className="text-light">
+          <h2 className="my-2 display-3">{blogData.title}</h2>
+          <ReactMarkdown
+            className="d-block text-left"
+            children={blogData.body}
+            remarkPlugins={[remarkGfm]}
+            components={{
+              code({ inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                return !inline && match ? (
+                  <SyntaxHighlighterComponent
+                    children={String(children).replace(/\n$/, "")}
+                    style={docco}
+                    language={match[1]}
+                    PreTag="div"
+                    // {...props}
+                  />
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+          />
         </article>
-        <div className='d-flex text-light'>
-            <img src={dummyAvatar} alt="BT" style={{borderRadius: "50%"}} width="50px" height="50px"/>
-            <div className='px-3'>
-              <h6>Username</h6>
-              <p>role</p>
-            </div>
-            <RatingComponent totalRaters={15982} ratingValue={3.5}/>
+        <div className="d-flex text-light">
+          <img
+            src={dummyAvatar}
+            alt="BT"
+            style={{ borderRadius: "50%" }}
+            width="50px"
+            height="50px"
+          />
+          <div className="px-3">
+            <h6>Username</h6>
+            <p>role</p>
+          </div>
+          <RatingComponent totalRaters={15982} ratingValue={3.5} />
         </div>
-        <div className='blogCommentContainer text-dark d-inline-block'>
-          {!blogComments?<div className='p-5 bg-light m-2'>NO COMMENTS YET</div> 
-            : blogComments.map((comment, index)=><Comment key={index} deleteComment={deleteCommentFunc} comment={comment}/>)
-          }
-          <form className='d-flex p-1 ' onSubmit={writeCommentFunc}>
-            <input className='form-control px-5 py-2' type='text' placeholder='comment' required/>
-            <button className='btn bg-light' type='submit' >
-              <img src={sendIcon} alt="" sizes='40px' />
+        <div className="blogCommentContainer text-dark d-inline-block">
+          {!blogComments ? (
+            <div className="p-5 bg-light m-2">NO COMMENTS YET</div>
+          ) : (
+            blogComments.map((comment, index) => (
+              <Comment
+                key={index}
+                deleteComment={deleteCommentFunc}
+                comment={comment}
+              />
+            ))
+          )}
+          <form className="d-flex p-1 " onSubmit={writeCommentFunc}>
+            <input
+              className="form-control px-5 py-2"
+              type="text"
+              placeholder="comment"
+              required
+            />
+            <button className="btn bg-light" type="submit">
+              <img src={sendIcon} alt="" sizes="40px" />
             </button>
           </form>
         </div>
       </div>
-  </div>;
+    </div>
+  );
 }
+
+const SyntaxHighlighterComponent = ({ language, children }) => {
+  console.table({ children, language });
+  return (
+    <SyntaxHighlighter language={language || null} style={docco}>
+      {children || ""}
+    </SyntaxHighlighter>
+  );
+};

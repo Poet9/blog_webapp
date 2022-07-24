@@ -1,6 +1,7 @@
 .userAccountOptions{
     background-color: #111;
     height: 100vh;
+    width: fit-content;
 }
 .UseroptionNavLinks{
     color: white;

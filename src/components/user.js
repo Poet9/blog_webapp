@@ -64,15 +64,15 @@ export default function User() {
     }
   }
   return (
-    <Container className='text-light px-0' style={{ minHeight: "100vh" }}>
-      <Row className='w-100'>
+    <Container className="text-light px-0" style={{ minHeight: "100vh" }}>
+      <Row className="w-100">
         {optionColFunc()}
-        <Col xxl={8}  style={{overflowY: "scroll", height: "100vh", margin: "10px"}}>
+        <Col style={{ overflowY: "scroll", height: "100vh", margin: "10px" }}>
           {ChosenOptionCol()}
         </Col>
       </Row>
     </Container>
-  )
+  );
 }
 
 

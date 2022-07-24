@@ -34,43 +34,66 @@ export const UserContext = React.createContext({});
 //main component
 function App() {
   // user fetching  
-  const { user, isAuthenticated } = useAuth0();
+  var user = {};
+  const { isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
   useEffect(() => {
-    if (isAuthenticated) {
+    console.log("auth shit: ", isAuthenticated);
+    if (isAuthenticated && false) {
+      requestTemplate(
+        `${process.env.REACT_APP_AUDIENCE}/api/user`,
+        "get",
+        "include"
+      )
+        .then((response) => JSON.parse(response))
+        .then((data) => (user = { ...data }));
       dispatch(setUser(user));
     }
-  }, [dispatch, isAuthenticated, user])
+  }, [dispatch, isAuthenticated, user]);
 
   //Control apearance/disapearance of the search bar
   const [searchDisplay, setSearchDisplay] = useState(false);
-  const searchDisplayFunc = () => { if (!searchDisplay) return 'd-none'; return 'd-flex'; }
-  //searched blog 
+  const searchDisplayFunc = () => {
+    if (!searchDisplay) return "d-none";
+    return "d-flex";
+  };
+  //searched blog
   const searchingForBlogFunc = (e) => {
     e.preventDefault();
     dispatch(setBlogTitle(e.target.firstChild.value));
-  }
+  };
   // suggesting blog titles while typing in search
-  const blogsAvailable = useSelector(state => state.blogs.value);
+  const blogsAvailable = useSelector((state) => state.blogs.value);
   const blogTitleListFunc = () => {
-    return <datalist id='blogTitlesList'>
-      {blogsAvailable.map((blog, index) => <option key={index} value={blog.title} />)}
-    </datalist>
-  }
+    return (
+      <datalist id="blogTitlesList">
+        {blogsAvailable.map((blog, index) => (
+          <option key={index} value={blog.title} />
+        ))}
+      </datalist>
+    );
+  };
   // user object state
   const [userOptionsDisplay, setUserOptionsDisplay] = useState(false);
-  //function for navbar display tha checks if user is logged in 
+  //function for navbar display tha checks if user is logged in
   const SignedInFunc = () => {
-    if (user?.nickname.length > 1) {
-      return <div className='pl-5'>
-        <img className="userImgNav"
-          onClick={() => setUserOptionsDisplay(!userOptionsDisplay)}
-          src={user.picture} alt="" width="40px"
-          height="40px" name="user" />
-      </div>;
+    if (user?.nickname?.length > 1) {
+      return (
+        <div className="pl-5">
+          <img
+            className="userImgNav"
+            onClick={() => setUserOptionsDisplay(!userOptionsDisplay)}
+            src={user.picture}
+            alt=""
+            width="40px"
+            height="40px"
+            name="user"
+          />
+        </div>
+      );
     }
-    return <AuthLogin />
-  }
+    return <AuthLogin />;
+  };
   return (
     <UserContext.Provider value={user}>
       <BrowserRouter>
